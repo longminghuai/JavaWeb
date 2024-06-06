@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Integer startIndex, Integer pagesize, Integer examNumber,
+String name, String classId, String startScore, String endScore);-->
+<mapper namespace="jsu.lmh.project1.mapper.AdmissionMapper">
+    <!--    id和方法名一致，resultType单条记录结果类型-->
+    <select id="selectallAdmission" resultType="jsu.lmh.project1.entity.Admission" resultMap="AdmissionRM">
+        select * from admission_detailed
+        <where>
+            <if test="name!=null">
+                姓名 like concat('%',#{name},'%')
+            </if>
+            <if test="classId!=null">
+                and 班级 =#{classId}
+            </if>
+            <if test="college_name!=null">
+            and 录取院校 like concat('%',#{college_name},'%')
+            </if>
+            <if test="startScore!=0">
+                and 高考成绩 between #{startScore} and #{endScore}
+            </if>
+            <if test="college_batch!=null">
+                and 录取批次=#{college_batch}
+            </if>
+        </where>
+        order by 考号 offset #{startIndex} rows fetch next #{pagesize} rows only;
+    </select>
+<!--    selectCount-->
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(*) from admission_detailed
+        <where>
+            <if test="name!=null">
+                姓名 like concat('%',#{name},'%')
+            </if>
+            <if test="college_name!=null">
+                and 录取院校 like concat('%',#{college_name},'%')
+            </if>
+            <if test="classId!=null">
+                and 班级 =#{classId}
+            </if>
+            <if test="startScore!=0">
+                and 高考成绩 between #{startScore} and #{endScore}
+            </if>
+            <if test="college_batch!=null">
+                and 录取批次=#{college_batch}
+            </if>
+        </where>
+    </select>
+<!--    select_briefly-->
+    <select id="select_briefly" resultType="jsu.lmh.project1.entity.Briefly">
+        select 录取批次 as batch,count(*) as num  from admission_detailed group  by 录取批次
+    </select>
+
+<!--    select_classbriefly
+statementType="CALLABLE"   指明这是一个存储过程
+-->
+    <select id="select_classbriefly" statementType="CALLABLE"
+            resultType="jsu.lmh.project1.entity.ClassBriefly"
+    resultMap="classbrieflyRM">
+        {call count_admissions_by_batch()}
+    </select>
+
+
+    <resultMap id="classbrieflyRM" type="jsu.lmh.project1.entity.ClassBriefly">
+        <result property="class_name" column="班级"/>
+        <result property="batch" column="录取批次"/>
+        <result property="num" column="录取人数"/>
+    </resultMap>
+
+    <resultMap id="AdmissionRM" type="jsu.lmh.project1.entity.Admission_detailed">
+        <result property="exam_number" column="考号"/>
+        <result property="name" column="姓名"/>
+        <result property="gender" column="性别"/>
+        <result property="class_name" column="班级"/>
+        <result property="college_name" column="录取院校"/>
+        <result property="entrance_score" column="高考成绩"/>
+        <result property="batch" column="录取批次"/>
+    </resultMap>
+<!--    BrieflyRM-->
+<!--    public String batch;//录取批次-->
+</mapper>
