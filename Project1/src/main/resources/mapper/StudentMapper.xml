@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jsu.lmh.project1.mapper.StudentMapper">
+    <!--    id和方法名一致，resultType单条记录结果类型-->
+
+<!--    List<Student> selectStudent(String className, String name, String gender);-->
+    <select id="selectPage" resultType="jsu.lmh.project1.entity.StudentDetail" resultMap="StudentRM">
+        select * from student,class_student
+                <where>
+                    student.exam_number=class_student.exam_number
+                    <if test="className!=null">
+                        and class_name like concat('%',#{className},'%')
+                    </if>
+                    <if test="name!=null">
+                        and name like concat('%',#{name},'%')
+                    </if>
+                    <if test="gender!=null">
+                        and gender =#{gender}
+                    </if>
+                </where>
+        order by student.exam_number offset #{startindex} rows fetch next #{pagesize} rows only;
+    </select>
+
+    <select id="selectcount" resultType="java.lang.Long">
+        select count(*) from student,class_student
+        <where>
+            student.exam_number=class_student.exam_number
+            <if test="className!=null">
+                and class_name like concat('%',#{className},'%')
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="gender!=null">
+                and gender =#{gender}
+            </if>
+        </where>
+    </select>
+<!--
+    public String exam_number;
+    public  String name;
+
+    public String gender;
+
+    public LocalDate birth_date;
+
+    public  String class_name;
+
+    public String hometown;
+
+    public int entrance_score;
+-->
+<!--    update_student-->
+    <update id="update_student">
+        update student set exam_number=#{student.exam_number} , name=#{student.name} , gender=#{student.gender} , birth_date=#{student.birth_date}  , hometown=#{student.hometown} , entrance_score=#{student.entrance_score} where exam_number=#{id};
+        update class_student set class_name=#{student.class_name} where exam_number=#{id};
+    </update>
+<!--    void DeleteBynumber(String id);-->
+
+    <insert id="insertStudent">
+        insert into student values(#{exam_number},#{name},#{gender},#{birth_date},#{hometown},#{entrance_score});
+        insert into class_student values(#{exam_number},#{class_name});
+    </insert>
+
+    <delete id="DeleteBynumber"  >
+        delete from class_student where exam_number=#{id};
+        delete from student where exam_number=#{id};
+    </delete>
+
+    <resultMap id="StudentRM" type="jsu.lmh.project1.entity.StudentDetail">
+        <result property="exam_number" column="exam_number"></result>
+        <result property="name" column="name"></result>
+        <result property="gender" column="gender"></result>
+        <result property="birth_date" column="birth_date"></result>
+        <result property="hometown" column="hometown"></result>
+        <result property="entrance_score" column="entrance_score"></result>
+        <result property="class_name" column="class_name"></result>
+    </resultMap>
+</mapper>
