@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jsu.lmh.project1.mapper.CollegeMapper">
+    <!--    id和方法名一致，resultType单条记录结果类型-->
+    <select id="selectPage" resultType="jsu.lmh.project1.entity.College" resultMap="selectPageRM">
+        select * from college
+                 <where>
+                     <if test="college_name!=null">
+                         college_name like concat('%',#{college_name},'%')
+                     </if>
+                 <if test="college_address!=null">
+                     and college_address like concat('%',#{college_address},'%')
+                 </if>
+                     <if test="college_batch!=null">
+                         and batch like concat('%',#{college_batch},'%')
+                     </if>
+                     <if test="college_id!=null">
+                         and college_id =#{college_id}
+                     </if>
+                 </where>
+                 order by college_id offset #{startindex} rows fetch next #{pagesize} rows only;
+    </select>
+
+<!--    selectcount-->
+
+    <select id="selectcount" resultType="java.lang.Long">
+        select count(*) from college
+        <where>
+            <if test="college_name!=null">
+                college_name like concat('%',#{college_name},'%')
+            </if>
+            <if test="college_address!=null">
+                and college_address like concat('%',#{college_address},'%')
+            </if>
+            <if test="college_batch!=null">
+                and batch like concat('%',#{college_batch},'%')
+            </if>
+            <if test="college_id!=null">
+                and college_id =#{college_id}
+            </if>
+        </where>
+    </select>
+<!--    void Deletebyid(Integer id);-->
+
+    <delete id="Deletebyid" >
+        delete from college where college_id=#{id}
+    </delete>
+
+<!--    int insertCollege(College college);-->
+    <insert id="insertCollege">
+        insert into college VALUES (#{college_id}, #{college_name}, #{college_address}, #{college_batch});
+    </insert>
+
+
+    <resultMap id="selectPageRM" type="jsu.lmh.project1.entity.College">
+        <id property="id" column="college_id"/>
+        <result property="college_name" column="college_name"/>
+        <result property="college_address" column="college_address"/>
+        <result property="college_batch" column="batch"/>
+    </resultMap>
+</mapper>
