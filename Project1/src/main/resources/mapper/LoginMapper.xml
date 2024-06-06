@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot_test2.mapper.LoginMapper">
+    <!--    id和方法名一致，resultType单条记录结果类型-->
+    <select id="Login" resultType="com.example.springboot_test2.pojo.Login" resultMap="LoginRM">
+  select * from administrator where account=#{account} and password=#{password};
+    </select>
+    <resultMap id="LoginRM" type="com.example.springboot_test2.pojo.Login">
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+    </resultMap>
+</mapper>
