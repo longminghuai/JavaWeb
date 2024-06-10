@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: LMH454502
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/university_admission_management_system #?serverTimezone=UTC
+  web:
+    loginurl: http://localhost:8080/
+  auto:
+    openurl: true
+
+server:
+  port: 8080
+
+
+mybatis:
+  type-aliases-package: com.javaweb.springboot.entity
+  mapper-locations: classpath:/mappers/*.xml
+
+##mybatis ????
+#pagehelper:
+#  helperDialect: oracle
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
+
+file:
+  name: log/log.log
+level:
+  root: info
+  com.javaweb.springboot: debug
+
