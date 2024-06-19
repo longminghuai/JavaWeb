@@ -148,7 +148,7 @@ def main():
         output.writerow(['年份', '省份', '院校代码', '学校', '学科门类', '专业类',
                         '专业名称', '计划招生人数', '类别'])
         
-        for i in range(11,66):
+        for i in range(11,100):
             province_code = str(i)  # 修改为你需要的省份代码
             lst_sch = get_school_list(province_id=province_code)
             

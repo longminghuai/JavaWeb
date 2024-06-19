@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Integer startIndex, Integer pagesize, Integer examNumber,
+String name, String classId, String startScore, String endScore);-->
+<mapper namespace="jsu.lmh.project1.mapper.CollegeMapper">
+    <resultMap id="CollegeResultMap" type="jsu.lmh.project1.entity.College">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="dual_class_name" column="dual_class_name" />
+        <result property="f985" column="f985" />
+        <result property="f211" column="f211" />
+        <result property="level_name" column="level_name" />
+        <result property="nature_name" column="nature_name" />
+        <result property="type_name" column="type_name" />
+        <result property="logo" column="type_name" />
+        <result property="address" column="type_name" />
+        <result property="email" column="type_name" />
+        <result property="site" column="type_name" />
+        <result property="phone" column="type_name" />
+        <result property="content" column="type_name" />
+        <association property="location" javaType="jsu.lmh.project1.entity.Location">
+            <result property="province" column="province" />
+            <result property="city" column="city" />
+        </association>
+    </resultMap>
+
+    <select id="listcollege" resultMap="CollegeResultMap">
+        SELECT college.id AS id, college.name AS name, f211, f985, level_name, nature_name, type_name, dual_class_name, province.name AS province, city.cityname AS city
+        ,logo,address,email,site,phone,content
+        FROM college
+             INNER JOIN college_city ON college.id = college_city.college_id
+             INNER JOIN city on city.id=college_city.city_id
+             INNER JOIN province_city ON city.id = province_city.city_id
+             INNER JOIN province ON province_city.province_id = province.id
+        <where>
+            <if test="college_name!=null">
+                name like concat('%',#{college_name},'%')
+            </if>
+            <if test="province!=null">
+                and province.name=#{province}
+            </if>
+            <if test="type_name!=null">
+                and type_name=#{type_name}
+            </if>
+            <if test="nature_name!=null">
+                and nature_name=#{nature_name}
+            </if>
+            <if test="level_name!=null">
+                and level_name=#{level_name}
+            </if>
+            <if test="dual_class_name!=null">
+                and dual_class_name=#{dual_class_name}
+            </if>
+            <if test="f985!=null">
+                and f985=#{f985}
+            </if>
+            <if test="f211!=null">
+                and f211=#{f211}
+            </if>
+        </where>
+        order by college_id limit #{pagesize} offset #{startindex}
+    </select>
+
+    <select id="selectcount" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM college
+        INNER JOIN college_city ON college.id = college_city.college_id
+        INNER JOIN city on city.id=college_city.city_id
+        INNER JOIN province_city ON city.id = province_city.city_id
+        INNER JOIN province ON province_city.province_id = province.id
+        <where>
+            <if test="college_name!=null">
+                name like concat('%',#{college_name},'%')
+            </if>
+            <if test="province!=null">
+                and province.name=#{province}
+            </if>
+            <if test="type_name!=null">
+                and type_name=#{type_name}
+            </if>
+            <if test="nature_name!=null">
+                and nature_name=#{nature_name}
+            </if>
+            <if test="level_name!=null">
+                and level_name=#{level_name}
+            </if>
+            <if test="dual_class_name!=null">
+                and dual_class_name=#{dual_class_name}
+            </if>
+            <if test="f985!=null">
+                and f985=#{f985}
+            </if>
+            <if test="f211!=null">
+                and f211=#{f211}
+            </if>
+        </where>
+    </select>
+</mapper>
