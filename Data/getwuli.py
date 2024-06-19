@@ -21,10 +21,12 @@ if response.status_code == 200:
     # 遍历search数据的键值对
     i=1
     for key, value in search_data.items():
+        print(value)
         temp = []
         temp.append(str(i))
         temp.append(value['score'])
         temp.append(value['num'])
+        temp.append(value["total"])
         result.append(temp)
         i+=1
         # res.append(li)

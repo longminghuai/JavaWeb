@@ -156,10 +156,10 @@ export default {
               一分一段
             </template>
             <el-menu-item index="6-1">
-              <router-link to="/class">历史类</router-link>
+              <router-link to="/ls">历史类</router-link>
             </el-menu-item>
             <el-menu-item index="6-2">
-              <router-link to="/student">物理类</router-link>
+              <router-link to="/wl">物理类</router-link>
             </el-menu-item>
           </el-submenu>
           <el-submenu index="7">
@@ -413,7 +413,7 @@ data() {
       },
       options : [
         {
-          value:'',
+          value:"全部",
           label:'全部'
         },{
           value:'北京',
@@ -521,7 +521,7 @@ data() {
       ],
       options_collegetype:[
       {
-          value:'',
+          value:'全部',
           label:'全部'
         },{
           value:'综合',
@@ -584,24 +584,7 @@ data() {
         "公办","民办","中外合作办学","内地与港澳台地区合作办学","独立学院","境外高校独立办学","其它"
       ],
       universities: [
-        {
-          logo: 'https://static-data.gaokao.cn/upload/logo/2347.jpg',
-          name: '贵州工商职业学院',
-          location: '贵州贵阳市',
-          info: ['专科（高职）', '财经类', '民办'],
-        },
-        {
-          logo: 'https://static-data.gaokao.cn/upload/logo/2347.jpg',
-          name: '清华大学',
-          location: '北京市海淀区',
-          info: ['本科', '综合类', '公办', '985', '211', '双一流', '强基计划'],
-        },
-        {
-          logo: 'https://static-data.gaokao.cn/upload/logo/2347.jpg',
-          name: '北京大学',
-          location: '北京市海淀区',
-          info: ['本科', '综合类', '公办', '985', '211', '双一流', '强基计划'],
-        },
+        
       ]
   }
 },

@@ -6,10 +6,9 @@ package jsu.lmh.project1.entity;
 public class ScoreSegment {
     int score; // 分数
     int count; // 该分数的考生人数
+    String seg;//分数段
+    int total;//合计
 
-    int type;//历史/物理
-
-    int year;//年份
-
+    String remark;//备注
 }
 

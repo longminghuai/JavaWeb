@@ -38,10 +38,10 @@ String name, String classId, String startScore, String endScore);-->
             <if test="college_name!=null">
                 name like concat('%',#{college_name},'%')
             </if>
-            <if test="province!=null">
+            <if test="province!=null and province!='全部'">
                 and province.name=#{province}
             </if>
-            <if test="type_name!=null">
+            <if test="type_name!=null and type_name!='全部'">
                 and type_name=#{type_name}
             </if>
             <if test="nature_name!=null">
@@ -74,10 +74,10 @@ String name, String classId, String startScore, String endScore);-->
             <if test="college_name!=null">
                 name like concat('%',#{college_name},'%')
             </if>
-            <if test="province!=null">
+            <if test="province!=null and province!='全部'">
                 and province.name=#{province}
             </if>
-            <if test="type_name!=null">
+            <if test="type_name!=null and type_name!='全部'">
                 and type_name=#{type_name}
             </if>
             <if test="nature_name!=null">

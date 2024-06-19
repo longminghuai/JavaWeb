@@ -25,6 +25,7 @@ if response.status_code == 200:
         temp.append(str(i))
         temp.append(value['score'])
         temp.append(value['num'])
+        temp.append(value["total"])
         result.append(temp)
         i+=1
         with open('lishi.csv', 'a+') as f:

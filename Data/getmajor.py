@@ -1,5 +1,6 @@
 import requests
-for i in range(1,100):
+num=[1,2,230]
+for i in num:
     for px in range(1,50):
         headers = {
             'Accept': 'application/json, text/plain, */*',
@@ -56,8 +57,8 @@ for i in range(1,100):
                 temp.append(j['name'])
                 temp.append(j['limit_year'])
                 print(temp)
-                with open('major.csv', 'a+') as f:
-                    f.write(','.join(map(str, temp))+'\n')
+                with open('major.csv', 'a+', encoding='utf-8') as f:
+                   f.write(','.join(map(str, temp))+'\n')
 #     # print(res)
 # f.close()
 
