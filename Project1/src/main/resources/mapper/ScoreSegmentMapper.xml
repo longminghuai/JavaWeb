@@ -21,7 +21,7 @@
     </select>
 
     <select id="querycount_wl" resultType="java.lang.Long">
-        select count(*) from lishi
+        select count(*) from wuli
         <where>
             <if test="score!=null">
                 score=#{score}
@@ -29,7 +29,7 @@
         </where>
     </select>
     <select id="queryseg_ls" resultMap="ScoreSegment">
-        select * from wuli
+        select * from lishi
         <where>
             <if test="score!=null">
                 score=#{score}

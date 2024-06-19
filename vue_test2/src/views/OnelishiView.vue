@@ -109,13 +109,13 @@
                         </el-form-item>
                         <el-form-item label="类别">
                             <el-select v-model="formInline.type" filterable placeholder="请选择类别" style="width: 150px;">
-                            <el-option
-                                v-for="item in options_type"
-                                :key="item"
-                                :label="item"
-                                :value="item"
-                                >
-                            </el-option>
+                                <el-option
+                                    v-for="item in options_type"
+                                    :key="item"
+                                    :label="item"
+                                    :value="item"
+                                    >
+                                </el-option>
                             </el-select>
                         </el-form-item>
                         <el_form-item label="分数">
@@ -289,6 +289,8 @@
         formInline: {
           user: "",
           region: "",
+          type:"物理",
+          year:2023
         },
         options : [
           2023

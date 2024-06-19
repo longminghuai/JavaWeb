@@ -16,7 +16,7 @@ public class ScoreSegmentService {
         int startindex=(page-1)*pagesize;
         List<ScoreSegment> list;
         Long total;
-        if(type=="物理"){
+        if(type.equals("物理")){
             list=scoreSegmentMapper.queryseg_wl(startindex, pagesize, score);
             total=scoreSegmentMapper.querycount_wl(score);
         }
