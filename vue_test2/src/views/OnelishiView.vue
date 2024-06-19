@@ -2,7 +2,7 @@
     <div>
         <el-container>
           <el-aside width="200px" class="aside-menu">
-          <h1 class="aside-title">Ö¾Ô¸Ìî±¨ÏµÍ³</h1>
+          <h1 class="aside-title">å¿—æ„¿å¡«æŠ¥ç³»ç»Ÿ</h1>
           <el-menu
             default-active="2"
             class="el-menu-vertical-demo"
@@ -14,56 +14,56 @@
           >
             <el-menu-item index="1">
               <i class="el-icon-menu"></i>
-              <span slot="title">ÖÇÄÜÖ¾Ô¸Ìî±¨?</span>
+              <span slot="title">æ™ºèƒ½å¿—æ„¿å¡«æŠ¥ğŸ”¥</span>
             </el-menu-item>
             <el-menu-item index="2">
               <i class="el-icon-message"></i>
-              <span slot="title">²é´óÑ§</span>
+              <span slot="title">æŸ¥å¤§å­¦</span>
             </el-menu-item>
             <el-submenu index="2-1">
               <template slot="title">
-                <router-link to="/admission">ÔºĞ£¿â</router-link>
+                <router-link to="/admission">é™¢æ ¡åº“</router-link>
               </template>
             </el-submenu>
             <el-submenu index="2-2">
               <template slot="title">
-                <router-link to="/admission_briefly">·ÖÊı°ñ</router-link>
+                <router-link to="/admission_briefly">åˆ†æ•°æ¦œ</router-link>
               </template>
             </el-submenu>
             <el-menu-item index="3">
               <i class="el-icon-message"></i>
-              <span slot="title">²é×¨Òµ</span>
+              <span slot="title">æŸ¥ä¸“ä¸š</span>
             </el-menu-item>
             <el-menu-item index="4">
               <i class="el-icon-message"></i>
-              <span slot="title">ÎÒµÄÖ¾Ô¸±í</span>
+              <span slot="title">æˆ‘çš„å¿—æ„¿è¡¨</span>
             </el-menu-item>
             <el-menu-item index="5">
               <i class="el-icon-message"></i>
-              <span slot="title">¸ß¿¼»°Ìâ</span>
+              <span slot="title">é«˜è€ƒè¯é¢˜</span>
             </el-menu-item>
             <el-submenu index="6">
               <template slot="title">
                 <i class="el-icon-message"></i>
-                Ò»·ÖÒ»¶Î
+                ä¸€åˆ†ä¸€æ®µ
               </template>
               <el-menu-item index="6-1">
-                <router-link to="/ls">ÀúÊ·Àà</router-link>
+                <router-link to="/ls">å†å²ç±»</router-link>
               </el-menu-item>
               <el-menu-item index="6-2">
-                <router-link to="/wl">ÎïÀíÀà</router-link>
+                <router-link to="/wl">ç‰©ç†ç±»</router-link>
               </el-menu-item>
             </el-submenu>
             <el-submenu index="7">
               <template slot="title">
                 <i class="el-icon-message"></i>
-                ÏµÍ³¹ÜÀí
+                ç³»ç»Ÿç®¡ç†
               </template>
               <el-menu-item index="7-1">
-                <router-link to="/class">ÓÃ»§¹ÜÀí</router-link>
+                <router-link to="/class">ç”¨æˆ·ç®¡ç†</router-link>
               </el-menu-item>
               <el-menu-item index="7-2">
-                <router-link to="/student">½ÇÉ«¹ÜÀí</router-link>
+                <router-link to="/student">è§’è‰²ç®¡ç†</router-link>
               </el-menu-item>
             </el-submenu>
           </el-menu>
@@ -76,19 +76,19 @@
                                 <el-button icon="el-icon-menu" size="mini" @click="menuHandler"></el-button>
                             </div>
                         </el-col>
-                        <el-col :span="1"><div class="table">Ê×Ò³</div></el-col>
+                        <el-col :span="1"><div class="table">é¦–é¡µ</div></el-col>
                         <el-col :span="20"><div class="table">&nbsp;</div></el-col>
                         <el-col :span="2">
-                            <!--   Í·ÏñÏÂÀ­²Ëµ¥ -->
+                            <!--   å¤´åƒä¸‹æ‹‰èœå• -->
                             <el-dropdown trigger="click">
                                 <div class="circle">
                                     <el-avatar :size="50" :src="imgUrl"></el-avatar>
                                 </div>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item icon="el-icon-plus">ÎÒµÄ</el-dropdown-item>
-                                    <el-dropdown-item icon="el-icon-circle-plus">ÕËµ¥</el-dropdown-item>
-                                    <el-dropdown-item icon="el-icon-circle-plus-outline">ÏûÏ¢</el-dropdown-item>
-                                    <el-dropdown-item icon="el-icon-check">ÍË³ö</el-dropdown-item>
+                                    <el-dropdown-item icon="el-icon-plus">æˆ‘çš„</el-dropdown-item>
+                                    <el-dropdown-item icon="el-icon-circle-plus">è´¦å•</el-dropdown-item>
+                                    <el-dropdown-item icon="el-icon-circle-plus-outline">æ¶ˆæ¯</el-dropdown-item>
+                                    <el-dropdown-item icon="el-icon-check">é€€å‡º</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </el-col>
@@ -96,8 +96,8 @@
                 </el-header>
                 <el-main style="border: 1px solid #eee">
                     <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                        <el-form-item label="Äê·İ">
-                            <el-select v-model="formInline.province" filterable placeholder="ÇëÑ¡Ôñ¸ß¿¼Äê·İ" style="width: 150px;">
+                        <el-form-item label="å¹´ä»½">
+                            <el-select v-model="formInline.year" filterable placeholder="è¯·é€‰æ‹©é«˜è€ƒå¹´ä»½" style="width: 150px;">
                             <el-option
                                 v-for="item in options"
                                 :key="item"
@@ -107,8 +107,8 @@
                             </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="Àà±ğ">
-                            <el-select v-model="formInline.type" filterable placeholder="ÇëÑ¡ÔñÀà±ğ" style="width: 150px;">
+                        <el-form-item label="ç±»åˆ«">
+                            <el-select v-model="formInline.type" filterable placeholder="è¯·é€‰æ‹©ç±»åˆ«" style="width: 150px;">
                             <el-option
                                 v-for="item in options_type"
                                 :key="item"
@@ -118,12 +118,15 @@
                             </el-option>
                             </el-select>
                         </el-form-item>
-                        <el_form-item label="·ÖÊı">
+                        <el_form-item label="åˆ†æ•°">
                             <el-input
                             v-model="formInline.score"
-                            placeholder="ÇëÊäÈëÄúÒªËÑË÷µÄ·ÖÊı"
+                            placeholder="è¯·è¾“å…¥æ‚¨è¦æœç´¢çš„åˆ†æ•°"
                             ></el-input>
                         </el_form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="onSubmit">æŸ¥è¯¢</el-button>
+                        </el-form-item>
                     </el-form>
                     <div class="onetoone">
                         <el-table
@@ -131,39 +134,35 @@
                             style="width: 100%">
                             <el-table-column
                                 prop="score"
-                                label="·ÖÊı"
+                                label="åˆ†æ•°"
                                 width="180">
                             </el-table-column>
                             <el-table-column
                                 prop="seg"
-                                label="ËùÔÚ·ÖÊı¶Î"
+                                label="æ‰€åœ¨åˆ†æ•°æ®µ"
                                 width="180">
                             </el-table-column>
                             <el-table-column
                                 prop="count"
-                                label="¸Ã·ÖÊı¶ÎÈËÊı">
+                                label="è¯¥åˆ†æ•°æ®µäººæ•°">
                             </el-table-column>
                             <el-table-column
                                 prop="total"
-                                label="ºÏ¼Æ">
+                                label="åˆè®¡">
                             </el-table-column>
-                            <el-table-column
-                                prop="remark"
-                                label="±¸×¢">
-                            </el-table-column>
-                            <el-table-column fixed="right" label="²Ù×÷" width="100">
+                            <el-table-column fixed="right" label="æ“ä½œ" width="100">
                                 <template slot-scope="scope">
                                 <el-button
                                     type="text"
                                     size="small"
                                     @click="openEditForm(scope.row)"
-                                    >ĞŞ¸Ä</el-button
+                                    >ä¿®æ”¹</el-button
                                 >
                                 <el-button
                                     type="text"
                                     size="small"
                                     @click="deleteCollege(scope.row.exam_number)"
-                                    >É¾³ı</el-button
+                                    >åˆ é™¤</el-button
                                 >
                                 </template>
                             </el-table-column>
@@ -279,9 +278,9 @@
     name: "HelloWorld",
   data() {
     return {
-      //²Ëµ¥¿ØÖÆ
+      //èœå•æ§åˆ¶
       isCollapse: false,
-      //Í·ÏñµØÖ·
+      //å¤´åƒåœ°å€
       imgUrl:require('../assets/logo.png'),
       pagesize: 10,
         total: 10,
@@ -295,10 +294,10 @@
           2023
         ],
         options_type:[
-            "ÎïÀí","ÀúÊ·"
+            "ç‰©ç†","å†å²"
         ],
         options_mcollegetype:[
-          "¹«°ì","Ãñ°ì","ÖĞÍâºÏ×÷°ìÑ§","ÄÚµØÓë¸Û°ÄÌ¨µØÇøºÏ×÷°ìÑ§","¶ÀÁ¢Ñ§Ôº","¾³Íâ¸ßĞ£¶ÀÁ¢°ìÑ§","ÆäËü"
+          "å…¬åŠ","æ°‘åŠ","ä¸­å¤–åˆä½œåŠå­¦","å†…åœ°ä¸æ¸¯æ¾³å°åœ°åŒºåˆä½œåŠå­¦","ç‹¬ç«‹å­¦é™¢","å¢ƒå¤–é«˜æ ¡ç‹¬ç«‹åŠå­¦","å…¶å®ƒ"
         ],
         universities: [
         ]
@@ -309,25 +308,20 @@
           this.$store.commit('MENUHANDLER')
       },
       onSubmit() {
-          //µã»÷²éÑ¯°´Å¥Ê±´¥·¢
+          //ç‚¹å‡»æŸ¥è¯¢æŒ‰é’®æ—¶è§¦å‘
           axios
-            .get("http://localhost:8080/college", {
+            .get("http://localhost:8080/oneseg", {
               params: {
                 page: this.page,
                 pagesize: this.pagesize,
-                college_name: this.formInline.college_name,
-                province: this.formInline.province,
-                type_name:this.formInline.type_name,
-                nature_name:this.formInline.nature_name,
-                level_name:this.formInline.level_name,
-                dual_class_name:this.formInline.dual_class_name,
-                f985:this.formInline.f985,
-                f211:this.formInline.f211
+                year: this.formInline.year,
+                type:this.formInline.type,
+                score:this.formInline.score,
               },
             })
             .then((result) => {
               console.log(result.data.data);
-              this.universities = result.data.data.rows;
+              this.tableData = result.data.data.rows;
               this.total = result.data.data.total;
             });
         },
@@ -335,64 +329,54 @@
           console.log(row);
         },
         handleSizeChange(val) {
-          // µ±¸Ä±äÃ¿¸ö·ÖÒ³´óĞ¡Ê±´¥·¢
+          // å½“æ”¹å˜æ¯ä¸ªåˆ†é¡µå¤§å°æ—¶è§¦å‘
           axios
-            .get("http://localhost:8080/college", {
+            .get("http://localhost:8080/oneseg", {
               params: {
                 page: this.page,
                 pagesize: val,
-                college_name: this.formInline.college_name,
-                province: this.formInline.province,
-                type_name:this.formInline.type_name,
-                nature_name:this.formInline.nature_name,
-                level_name:this.formInline.level_name,
-                dual_class_name:this.formInline.dual_class_name,
-                f985:this.formInline.f985,
-                f211:this.formInline.f211
+                year: this.formInline.year,
+                type:this.formInline.type,
+                score:this.formInline.score,
               },
             })
             .then((result) => {
-              // ½ÓÊÕ³É¹¦·µ»ØµÄ½á¹û
+              // æ¥æ”¶æˆåŠŸè¿”å›çš„ç»“æœ
               console.log(result.data.data.rows);
-              this.universities = result.data.data.rows;
+              this.tableData = result.data.data.rows;
               this.pagesize = val;
               this.total = result.data.data.total;
             });
-          console.log(`Ã¿Ò³ ${val} Ìõ`);
+          console.log(`æ¯é¡µ ${val} æ¡`);
         },
   
         handleCurrentChange(val) {
-          //µ±¸Ä±äµ±Ç°Ò³Ê±´¥·¢
+          //å½“æ”¹å˜å½“å‰é¡µæ—¶è§¦å‘
           axios
-            .get("http://localhost:8080/college", {
+            .get("http://localhost:8080/oneseg", {
               params: {
                 page: val,
                 pagesize: this.pagesize,
-                college_name: this.formInline.college_name,
-                province: this.formInline.province,
-                type_name:this.formInline.type_name,
-                nature_name:this.formInline.nature_name,
-                level_name:this.formInline.level_name,
-                dual_class_name:this.formInline.dual_class_name,
-                f985:this.formInline.f985,
-                f211:this.formInline.f211
+                year: this.formInline.year,
+                type:this.formInline.type,
+                score:this.formInline.score,
               },
             })
             .then((result) => {
-              //½ÓÊÕ³É¹¦·µ»ØµÄ½á¹û
+              //æ¥æ”¶æˆåŠŸè¿”å›çš„ç»“æœ
               console.log(result.data.data.rows);
-              this.universities = result.data.data.rows;
+              this.tableData = result.data.data.rows;
               this.page = val;
             });
-          console.log(`µ±Ç°Ò³: ${val}`);
+          console.log(`å½“å‰é¡µ: ${val}`);
         },
     },
-    //¹³×Ó·½·¨
+    //é’©å­æ–¹æ³•
   mounted() {
-      axios.get("http://localhost:8080/college").then((result) => {
-        //½ÓÊÕ³É¹¦·µ»ØµÄ½á¹û
+      axios.get("http://localhost:8080/oneseg").then((result) => {
+        //æ¥æ”¶æˆåŠŸè¿”å›çš„ç»“æœ
         console.log(result.data.data.rows);
-        this.universities = result.data.data.rows;
+        this.tableData = result.data.data.rows;
         this.total = result.data.data.total;
       });
     },

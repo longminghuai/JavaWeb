@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/MainView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/OnelishiView.vue')
   },
   {
     path: '/about',
