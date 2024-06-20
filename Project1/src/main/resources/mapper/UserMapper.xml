@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Integer startIndex, Integer pagesize, Integer examNumber,
+String name, String classId, String startScore, String endScore);-->
+<mapper namespace="jsu.lmh.project1.mapper.UserMapper">
+    <insert id="insertuser">
+        insert into user(username,password) values (#{username},#{password});
+    </insert>
+    <select id="findByusername_admin" resultType="jsu.lmh.project1.entity.Admin">
+        select * from admin where username=#{username}
+    </select>
+    <select id="findByusername_user" resultType="jsu.lmh.project1.entity.User">
+        select * from user where username=#{username}
+    </select>
+</mapper>

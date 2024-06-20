@@ -4,38 +4,36 @@
 		<div class="logon">
 			<div :class="overlaylong">
 				<div class="overlaylong-Signin" v-if="disfiex == 0">
-					<h2 class="overlaylongH2">Sign in</h2>
-					<input type="text" placeholder="user">
-					<input type="text" placeholder="password">
-					<h3>Forgot your password?</h3>
-					<button class="inupbutton">Sign in</button>
+					<h2 class="overlaylongH2">登录</h2>
+					<input type="text" placeholder="用户名" v-model="loginUser">
+					<input type="password" placeholder="密码" v-model="loginPassword">
+					<button class="inupbutton" @click="handleLogin">登录</button>
 				</div>
 				<div class="overlaylong-Signup" v-if="disfiex == 1">
-					<h2 class="overlaylongH2">Registered Account</h2>
-					<input type="text" placeholder="user">
-					<input type="text" placeholder="password">
-					<button class="inupbutton">Sign up</button>
+					<h2 class="overlaylongH2">注册账号</h2>
+					<input type="text" placeholder="用户名" v-model="registerUser">
+					<input type="password" placeholder="密码" v-model="registerPassword">
+					<button class="inupbutton" @click="handleRegister">注册</button>
 				</div>
- 
 			</div>
 			<div :class="overlaytitle">
 				<div class="overlaytitle-Signin" v-if="disfiex == 0">
 					<h2 class="overlaytitleH2">Hello,Friend!</h2>
 					<p class="overlaytitleP">
-						Enter your personal details and start journey with us
+						输入你的个人信息，开始你的旅程
 					</p>
-					<div class="buttongohs" @click="Signin">Sign up</div>
+					<div class="buttongohs" @click="Signin">注册</div>
 				</div>
 				<div class="overlaytitle-Signup" v-if="disfiex == 1">
 					<h2 class="overlaytitleH2">Welcome Back!</h2>
-					<p class="overlaytitleP">To keep connected with us please login with your personal info</p>
-					<div class="buttongohs" @click="Signup">Sign in</div>
+					<p class="overlaytitleP">请登录你的个人信息，保持与我们的联系</p>
+					<div class="buttongohs" @click="Signup">登录</div>
 				</div>
 			</div>
 		</div>
- 
 	</div>
 </template>
+
 <style>
 .center {
     width: 100vw;
@@ -219,15 +217,42 @@ h3{
     line-height: 40px;
     margin-top: 30px;
 }
+.inupbutton {
+    background-color: #29eac4;
+    border: none;
+    width: 180px;
+    height: 40px;
+    border-radius: 50px;
+    font-size: 15px;
+    color: #fff;	
+    text-align: center;
+    line-height: 40px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.inupbutton:hover {
+    background-color: #2db2a6;
+}
+
+.inupbutton:active {
+    background-color: #1f8b7a;
+}
+
 </style>
 
 <script>
+import axios from 'axios'
 	export default {
 		data() {
 			return {
 				overlaylong: 'overlaylong',
 				overlaytitle: 'overlaytitle',
-				disfiex: 0
+				disfiex: 0,
+				loginUser: '',
+				loginPassword: '',
+				registerUser: '',
+				registerPassword: ''
 			}
 		},
 		methods: {
@@ -244,7 +269,38 @@ h3{
 				setTimeout(() => {
 					this.disfiex = 0
 				}, 200)
- 
+			},
+			handleLogin() {
+                if (this.loginUser == null||this.loginUser=='') {
+                    alert("账号不能为空");
+                    return;
+                }
+                if (this.loginPassword == null||this.loginPassword=='') {
+                    alert("密码不能为空");
+                    return;
+                }
+                console.log(this.loginUser)
+				axios.post("http://localhost:8080/login",
+                {
+                    username:this.loginUser,
+                    password:this.loginPassword
+                }).then((response) => {
+                // 处理响应
+                console.log(response);
+                if (response.data.code !== 1) {
+                    alert(response.data.msg);
+                    return;
+                } else {
+                    if (this.$router.currentRoute.path !== "/Home") {
+                        this.$router.push("/Home");
+                    }
+                }
+            });
+				console.log('登录', this.loginUser, this.loginPassword);
+			},
+			handleRegister() {
+				// 在这里处理注册逻辑
+				console.log('注册', this.registerUser, this.registerPassword);
 			}
 		}
 	}

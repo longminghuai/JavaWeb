@@ -1,5 +1,7 @@
 import requests
+import pandas as pd
 num=[1,2,230]
+datalist=[]
 for i in num:
     for px in range(1,50):
         headers = {
@@ -56,9 +58,10 @@ for i in num:
                 temp.append(j['level3_name'])
                 temp.append(j['name'])
                 temp.append(j['limit_year'])
-                print(temp)
-                with open('major.csv', 'a+', encoding='utf-8') as f:
-                   f.write(','.join(map(str, temp))+'\n')
+                datalist.append(temp)
+                df = pd.DataFrame(datalist, columns=['boy_rate', 'degree', 'fivesalaryavg', 'girl_rate', 'level1_name', 'level2_name','level3_name','name','limit_year'])
+                df.to_excel('newmajor.xlsx', index=False)
+                #    f.write(','.join(map(str, temp))+'\n')
 #     # print(res)
 # f.close()
 
