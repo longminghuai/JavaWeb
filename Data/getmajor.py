@@ -58,6 +58,7 @@ for i in num:
                 temp.append(j['level3_name'])
                 temp.append(j['name'])
                 temp.append(j['limit_year'])
+                print(temp)
                 datalist.append(temp)
                 df = pd.DataFrame(datalist, columns=['boy_rate', 'degree', 'fivesalaryavg', 'girl_rate', 'level1_name', 'level2_name','level3_name','name','limit_year'])
                 df.to_excel('newmajor.xlsx', index=False)
