@@ -271,33 +271,38 @@ import axios from 'axios'
 				}, 200)
 			},
 			handleLogin() {
-                if (this.loginUser == null||this.loginUser=='') {
+                if (this.loginUser == null || this.loginUser == '') {
                     alert("账号不能为空");
                     return;
                 }
-                if (this.loginPassword == null||this.loginPassword=='') {
+                if (this.loginPassword == null || this.loginPassword == '') {
                     alert("密码不能为空");
                     return;
                 }
-                console.log(this.loginUser)
-				axios.post("http://localhost:8080/login",
-                {
-                    username:this.loginUser,
-                    password:this.loginPassword
-                }).then((response) => {
-                // 处理响应
-                console.log(response);
-                if (response.data.code !== 1) {
-                    alert(response.data.msg);
-                    return;
-                } else {
-                    if (this.$router.currentRoute.path !== "/Home") {
-                        this.$router.push("/Home");
+                console.log(this.loginUser);
+
+                axios.post("http://localhost:8080/login", {
+                    username: this.loginUser,
+                    password: this.loginPassword
+                })
+                .then((response) => {
+                    console.log(response);
+                    if (response.data.code !== 1) {
+                        alert(response.data.msg);
+                        return;
+                    } else {
+                        if (this.$router.currentRoute.path !== "/Home") {
+                            this.$router.push("/Home");
+                        }
                     }
-                }
-            });
-				console.log('登录', this.loginUser, this.loginPassword);
-			},
+                })
+                .catch((error) => {
+                    console.error('Error during login request:', error);
+                });
+
+                console.log('登录', this.loginUser, this.loginPassword);
+            },
+
 			handleRegister() {
 				// 在这里处理注册逻辑
 				console.log('注册', this.registerUser, this.registerPassword);
