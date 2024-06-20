@@ -4,6 +4,11 @@ import jsu.lmh.project1.entity.Admin;
 import jsu.lmh.project1.entity.Result;
 import jsu.lmh.project1.entity.User;
 import jsu.lmh.project1.service.Userservice;
+//import org.apache.shiro.SecurityUtils;
+//import org.apache.shiro.authc.AuthenticationException;
+//import org.apache.shiro.authc.AuthenticationToken;
+//import org.apache.shiro.authc.UsernamePasswordToken;
+//import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +22,13 @@ public class UserController {
     public Result login(@RequestBody Map<String, String> params){
         String username = params.get("username");
         String password = params.get("password");
-        Admin admin = userservice.login_admin(username, password);
-        User user = userservice.login_user(username, password);
-        if(admin!=null){
-            return Result.success(admin);
-        }
-        else if(user!=null){
-            return Result.success(user);
-        }
-        else{
-            return Result.error("账号或密码错误");
-        }
+//        //1获取subject对象
+//        Subject subject  = SecurityUtils.getSubject();
+//        //2封装请求数据到token
+//        AuthenticationToken token = new UsernamePasswordToken(username,password);
+//        subject.login(token);
+//        return Result.success("登陆成功");
+        return null;
     }
     @PostMapping("register")
     public Result Register(String username,String password){
