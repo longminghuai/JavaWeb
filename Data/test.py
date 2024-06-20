@@ -48,6 +48,7 @@
 #             response.raise_for_status()
 #             data = response.json()
 #             num = int(data['data']['numFound'])
+#             # print(data)
 #             for item in data['data']['item']:
 #                 lst_sch.append([item['school_id'], str(item['code_enroll']), item['name'],
 #                                item['province_name'], item['city_name']])
@@ -71,7 +72,7 @@
 #             for item in data:
 #                 tmp = [year, province, scode[:-2], sname, item['level2_name'], item['level3_name'], item['spname'],
 #                        item['min'], item['min_section'],
-#                        item['sp_info'], city, item['local_batch_name'],
+#                        item['local_type_name'], city, item['local_batch_name'],
 #                        f'https://www.gaokao.cn/school/{sid}/provinceline']
 #                 output.writerow(tmp)
 #     save_file.close()
@@ -147,20 +148,20 @@ def main():
     output.writerow(['年份', '省份', '院校代码', '学校', '学科门类', '专业类',
                     '专业名称', '最低分', '最低位次', '选科要求', '城市', '地址', '录取批次', '网址'])
     for i in range(11,66):
-        province_code = str(i)  # 修改为你需要的省份代码
+        province_code = str(i) 
         lst_sch = get_school_list(province_id=province_code)
         for sid, scode, sname, province, city in lst_sch:
             print(sid, scode[:-2], sname, province, city)
             for year in range(2023, 2022, -1):
                 data = get_detail(year=year, sid=sid, province_code=province_code)
                 for item in data:
+                    print(item)
                     tmp = [year, province, scode[:-2], sname, item.get('level2_name', ''), item.get('level3_name', ''), item.get('spname', ''),
                         item.get('min', ''), item.get('min_section', ''),
-                        item.get('sg_name', ''), city, item.get('local_batch_name', ''),
+                        item.get('local_type_name', ''), city, item.get('local_batch_name', ''),
                         f'https://www.gaokao.cn/school/{sid}/provinceline']
                     output.writerow(tmp)
                     print(tmp)
-        save_file.close()
 
 if __name__ == '__main__':
     main()

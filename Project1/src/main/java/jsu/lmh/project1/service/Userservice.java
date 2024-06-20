@@ -4,6 +4,7 @@ import jsu.lmh.project1.entity.Admin;
 import jsu.lmh.project1.entity.User;
 import jsu.lmh.project1.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 public class Userservice {
     @Autowired
     UserMapper userMapper;
+//    @Autowired
+//    private RedisTemplate<String, User> redisTemplate;
     public User query_user(String username){
         return userMapper.findByusername_user(username);
     }

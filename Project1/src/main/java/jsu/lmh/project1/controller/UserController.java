@@ -9,6 +9,10 @@ import jsu.lmh.project1.service.Userservice;
 //import org.apache.shiro.authc.AuthenticationToken;
 //import org.apache.shiro.authc.UsernamePasswordToken;
 //import org.apache.shiro.subject.Subject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,21 +27,18 @@ import java.util.Map;
 public class UserController {
     @Autowired
     Userservice userservice;
-    @Autowired
-    private AuthenticationManager authenticationManager;
     @PostMapping("login")
     public Result login(@RequestBody Map<String, String> params) {
         String username = params.get("username");
         String password = params.get("password");
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
-            );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            return Result.success("登录成功");
-        } catch (AuthenticationException e) {
-            return Result.error("登录失败: " + e.getMessage());
-        }
+        //1获取subject对象
+        Subject subject  = SecurityUtils.getSubject();
+        //2封装请求数据到token
+        AuthenticationToken token = new UsernamePasswordToken(username,password);
+
+        subject.login(token);
+
+        return Result.success("登陆成功");
     }
     @PostMapping("register")
     public Result Register(String username,String password){

@@ -6,6 +6,7 @@ import jsu.lmh.project1.service.CollegeService;
 //import org.apache.shiro.SecurityUtils;
 //import org.apache.shiro.authz.annotation.RequiresRoles;
 //import org.apache.shiro.subject.Subject;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ public class CollegeController {
 
 //    @RequiresRoles("vip")
     @GetMapping("college")
-//    @RequiresRoles("vip")
+    @RequiresRoles("vip")
     public Result listcollege(@RequestParam(defaultValue = "1") Integer page,
                               @RequestParam(defaultValue = "10") Integer pagesize,
                               String college_name,String province,String type_name,String nature_name,

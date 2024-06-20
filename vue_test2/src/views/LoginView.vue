@@ -286,14 +286,15 @@ import axios from 'axios'
                     password: this.loginPassword
                 })
                 .then((response) => {
-                    console.log(response);
+                    console.log(response.data);
+                    // 处理成功返回的结果
                     if (response.data.code !== 1) {
-                        alert(response.data.msg);
-                        return;
+                    alert(response.data.msg);
+                    return;
                     } else {
-                        if (this.$router.currentRoute.path !== "/Home") {
-                            this.$router.push("/Home");
-                        }
+                    if (this.$router.currentRoute.path !== "/home") {
+                        this.$router.push("/home");
+                    }
                     }
                 })
                 .catch((error) => {
