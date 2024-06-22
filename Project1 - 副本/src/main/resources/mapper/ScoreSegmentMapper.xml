@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jsu.lmh.project1.mapper.ScoreSegmentMapper">
+    <resultMap id="ScoreSegment" type="jsu.lmh.project1.entity.ScoreSegment">
+        <id property="score" column="score"/>
+        <result property="count" column="num"/>
+        <result property="seg" column="sublevel"/>
+        <result property="total" column="total"/>
+    </resultMap>
+
+    <select id="queryseg_wl" resultMap="ScoreSegment">
+        select * from wuli
+        <where>
+            <if test="score!=null">
+                score=#{score}
+            </if>
+        </where>
+        order by score desc limit #{pagesize} offset #{startindex}
+    </select>
+
+    <select id="querycount_wl" resultType="java.lang.Long">
+        select count(*) from wuli
+        <where>
+            <if test="score!=null">
+                score=#{score}
+            </if>
+        </where>
+    </select>
+    <select id="queryseg_ls" resultMap="ScoreSegment">
+        select * from lishi
+        <where>
+            <if test="score!=null">
+                score=#{score}
+            </if>
+        </where>
+        order by score desc  limit #{pagesize} offset #{startindex}
+    </select>
+
+    <select id="querycount_ls" resultType="java.lang.Long">
+        select count(*) from lishi
+        <where>
+            <if test="score!=null">
+                score=#{score}
+            </if>
+        </where>
+    </select>
+</mapper>
