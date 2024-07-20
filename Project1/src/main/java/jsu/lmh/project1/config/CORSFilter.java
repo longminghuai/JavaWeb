@@ -26,8 +26,11 @@ public class CORSFilter extends FormAuthenticationFilter {
         HttpServletResponse resp=(HttpServletResponse) response;
         //返回码为200才能到达vue的.then语句
         resp.setStatus(HttpServletResponse.SC_OK);
+//        System.out.println("被拦截了");
         resp.setContentType("application/json;charset=utf8");
-        resp.setHeader("Access-Control-Allow-Origin","http://localhost:9001");
+//        resp.setHeader("Access-Control-Allow-Origin","http://localhost:80");
+//        resp.setHeader("Access-Control-Allow-Origin","http://localhost:9001");
+        resp.setHeader("Access-Control-Allow-Origin","*");
         resp.setHeader("Access-Control-Allow-Methods","*");
         resp.setHeader("Access-Control-Allow-Headers","*");
         resp.setHeader("Access-Control-Allow-Credentials","true");

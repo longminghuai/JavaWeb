@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Integer startIndex, Integer pagesize, Integer examNumber,
+String name, String classId, String startScore, String endScore);-->
+<mapper namespace="jsu.lmh.project1.mapper.MajorMapper">
+    <resultMap id="MajorResultMap" type="jsu.lmh.project1.entity.Major">
+        <id property="id" column="id" />
+        <result property="spname" column="spname" />
+        <result property="level1_name" column="level1_name" />
+        <result property="level2_name" column="level2_name" />
+        <result property="level3_name" column="level3_name" />
+        <result property="degree" column="degree" />
+        <result property="fivesalaryavg" column="fivesalaryavg" />
+        <result property="boy_rate" column="boy_rate" />
+        <result property="girl_rate" column="girl_rate" />
+        <result property="limit_year" column="limit_year" />
+    </resultMap>
+
+    <select id="selectcount" resultType="java.lang.Long">
+        select count(*) from major
+        <where>
+            level1_name!=''
+            <if test="level1Name!=null">
+                and level1_name=#{level1Name}
+            </if>
+            <if test="level2Name!=null">
+                and level2_name=#{level2Name}
+            </if>
+            <if test="spname!=null">
+                and spname like concat('%',#{spname},'%')
+            </if>
+        </where>
+    </select>
+
+<!--    int startindex, Integer pagesize, String level1Name, String level2Name, String level3Name, String spname-->
+    <select id="query_all" resultMap="MajorResultMap">
+        select * from major
+        <where>
+            level1_name!=''
+            <if test="level1Name!=null">
+                and level1_name=#{level1Name}
+            </if>
+            <if test="level2Name!=null">
+                and level2_name=#{level2Name}
+            </if>
+            <if test="spname!=null">
+                and spname like concat('%',#{spname},'%')
+            </if>
+        </where>
+        order by id limit #{pagesize} offset #{startindex}
+    </select>
+    <select id="getmajor_android" resultMap="MajorResultMap">
+        select * from major
+        <where>
+            level1_name!=''
+            <if test="level1_name!=null">
+                and level1_name=#{level1_name}
+            </if>
+            <if test="spname!=null">
+                and spname like concat('%',#{spname},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

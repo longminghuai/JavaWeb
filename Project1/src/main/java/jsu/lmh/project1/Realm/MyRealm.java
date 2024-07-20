@@ -1,7 +1,5 @@
 package jsu.lmh.project1.Realm;
 
-import jsu.lmh.project1.entity.Admin;
-import jsu.lmh.project1.entity.Result;
 import jsu.lmh.project1.entity.User;
 import jsu.lmh.project1.service.Userservice;
 import org.apache.shiro.SecurityUtils;
@@ -20,36 +18,28 @@ import java.util.Set;
 public class MyRealm extends AuthorizingRealm {
     @Autowired
     Userservice userservice;
-    /**
-     * 授权方法
-     * @param principalCollection
-     * @return
-     */
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("进入授权...");
-        //系统角色
-        Set<String> roles=new HashSet<>();
-//        roles.add("system");
-        Set<String> permissions=new HashSet<>();
+        Set<String> roles = new HashSet<>();
+        Set<String> permissions = new HashSet<>();
 
-        Subject subject= SecurityUtils.getSubject();
-        User user=(User)subject.getPrincipal();
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
         System.out.println(user.getUsername());
 
-        List<Integer> roleIds=userservice.selroleIdByuserId(user.getId());
-        //为当前用户添加角色和权限
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-//        info.addStringPermission("user:all");
+        List<Integer> roleIds = userservice.selroleIdByuserId(user.getId());
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
-        for(Integer id:roleIds){
-            System.out.println("roleId :" +id);
+        for (Integer id : roleIds) {
+            System.out.println("roleId :" + id);
             roles.add(userservice.selrolenameByroleId(id));
 
-            List<Integer> premIds=userservice.selpremIdByroleId(id);
+            List<Integer> premIds = userservice.selpremIdByroleId(id);
 
-            for(Integer pId:premIds){
-                System.out.println("premId :"+pId);
+            for (Integer pId : premIds) {
+                System.out.println("premId :" + pId);
                 permissions.add(userservice.selpremnameBypremId(pId));
             }
         }
@@ -58,31 +48,46 @@ public class MyRealm extends AuthorizingRealm {
         return info;
     }
 
-    /**
-     * 认证方法
-     * @param authenticationToken
-     * @return
-     * @throws AuthenticationException
-     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("doget load");
-        //这里强转的类型不一定要是UsernamePasswordToken ，具体要看你在登录接口中所传的对象类型
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
-        String username=usernamePasswordToken.getUsername();
-        System.out.println(username+" ss "+usernamePasswordToken.getUsername());
-        Admin admin = userservice.query_admin(username);
+        String username = usernamePasswordToken.getUsername();
+        System.out.println(username + " ss " + usernamePasswordToken.getUsername());
         User user = userservice.query_user(username);
         SimpleAuthenticationInfo simpleAuthenticationInfo = null;
-        if(admin!=null){
-            simpleAuthenticationInfo= new SimpleAuthenticationInfo(admin, admin.getPassword(), "MyRealm");
-
+        if (user != null) {
+            simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), "MyRealm");
         }
-        else if(user!=null){
-            simpleAuthenticationInfo= new SimpleAuthenticationInfo(user, user.getPassword(), "MyRealm");
-        }
-//        System.out.println(user.getPassword()+" "+usernamePasswordToken.getPassword());
-//        System.out.println(simpleAuthenticationInfo.getPrincipals());
         return simpleAuthenticationInfo;
+    }
+
+    public void clearCachedAuthorizationInfo(String username) {
+        PrincipalCollection principals = getAvailablePrincipal(username);
+        if (principals != null) {
+            super.clearCachedAuthorizationInfo(principals);
+        }
+    }
+
+    public void clearCachedAuthenticationInfo(String username) {
+        PrincipalCollection principals = getAvailablePrincipal(username);
+        if (principals != null) {
+            super.clearCachedAuthenticationInfo(principals);
+        }
+    }
+
+    public void clearCache(String username) {
+        PrincipalCollection principals = getAvailablePrincipal(username);
+        if (principals != null) {
+            super.clearCache(principals);
+        }
+    }
+
+    private PrincipalCollection getAvailablePrincipal(String username) {
+        User user = userservice.query_user(username);
+        if (user != null) {
+            return new SimpleAuthenticationInfo(user, user.getPassword(), getName()).getPrincipals();
+        }
+        return null;
     }
 }

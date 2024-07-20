@@ -7,10 +7,9 @@ import lombok.Data;
  */
 @Data
 public class ScoreSegment {
-    int score; // 分数
-    int count; // 该分数的考生人数
+    Integer score; // 分数
+    Integer count; // 该分数的考生人数
     String seg;//分数段
-    int total;//合计
-
+    Integer total;//合计
 }
 

@@ -6,9 +6,6 @@
     <insert id="insertuser">
         insert into user(username,password) values (#{username},#{password});
     </insert>
-    <select id="findByusername_admin" resultType="jsu.lmh.project1.entity.Admin">
-        select * from admin where username=#{username}
-    </select>
     <select id="findByusername_user" resultType="jsu.lmh.project1.entity.User">
         select * from user where username=#{username}
     </select>
@@ -24,5 +21,23 @@
     <select id="selpremnameBypremId" resultType="java.lang.String">
         select permname from perm where id=#{id}
     </select>
+    <select id="getalluser" resultType="jsu.lmh.project1.entity.User_Role">
+        select user_id,role_id,username,rolename from user_role,role,user
+        <where>
+            user_role.user_id=user.id and user_role.role_id=role.id
+             <if test="rolename!=null and rolename!=''">
+                and rolename=#{rolename}
+             </if>
+            <if test="username!=null and username!=''">
+                and username=#{username}
+            </if>
+        </where>
+    </select>
+<!--    <resultMap id="alluser" type="jsu.lmh.project1.entity.User_Role">-->
+<!--        <result property="user_id" column="user_id"></result>-->
+<!--        <result property="role_id" column="user_id"></result>-->
+<!--        <result property="username" column="username"></result>-->
+<!--        <result property="rolename" column="rolename"></result>-->
+<!--    </resultMap>-->
 
 </mapper>

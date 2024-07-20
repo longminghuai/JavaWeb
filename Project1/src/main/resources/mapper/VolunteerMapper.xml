@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jsu.lmh.project1.mapper.VolunteerMapper">
+
+    <resultMap id="InliResultMap" type="jsu.lmh.project1.entity.college_major">
+        <id property="collegeid" column="collegeid"/>
+        <result property="collegename" column="collegename"/>
+        <result property="majorid" column="majorid"/>
+        <result property="majorname" column="majorname"/>
+        <result property="num" column="num"/>
+        <result property="score" column="score"/>
+        <result property="rank" column="rrank"/> <!-- 注意这里的rank -->
+    </resultMap>
+
+<!--    <select id="query_volunteer_intelligent" resultMap="InliResultMap">-->
+<!--        SELECT college_id as collegeid, college.name as collegename, major_id as majorid,-->
+<!--        spname as majorname, num,-->
+<!--        CASE WHEN #{fk} = '物理' THEN wlscore-->
+<!--        WHEN #{fk} = '历史' THEN lsscore-->
+<!--        END as score,-->
+<!--        CASE WHEN #{fk} = '物理' THEN wlrank-->
+<!--        WHEN #{fk} = '历史' THEN lsrank-->
+<!--        END as rrank &lt;!&ndash; 注意这里的rank &ndash;&gt;-->
+<!--        FROM college-->
+<!--        JOIN college_city ON college.id = college_city.college_id-->
+<!--        JOIN city ON city.id = college_city.city_id-->
+<!--        JOIN college_major ON college_major.id = college.id-->
+<!--        JOIN major ON college_major.major_id = major.id-->
+<!--        join province_city on province_city.city_id =city.id-->
+<!--        join province on province_city.province_id =province.id-->
+<!--        WHERE wlrank != 0-->
+<!--        <if test="collegeName != null">-->
+<!--            AND college.name LIKE CONCAT('%', #{collegeName}, '%')-->
+<!--        </if>-->
+<!--        <if test="province != null and province != '全部'">-->
+<!--            AND province.name = #{province}-->
+<!--        </if>-->
+<!--        <if test="city != null">-->
+<!--            AND city.cityname = #{city}-->
+<!--        </if>-->
+<!--        <if test="typeName != null and typeName != '全部'">-->
+<!--            AND type_name = #{typeName}-->
+<!--        </if>-->
+<!--        <if test="natureName != null">-->
+<!--            AND nature_name = #{natureName}-->
+<!--        </if>-->
+<!--        <if test="level1Name != null">-->
+<!--            AND level1_name = #{level1Name}-->
+<!--        </if>-->
+<!--        <if test="level2Name != null">-->
+<!--            AND level2_name = #{level2Name}-->
+<!--        </if>-->
+<!--        <if test="level3Name != null">-->
+<!--            AND level3_name = #{level3Name}-->
+<!--        </if>-->
+<!--        <if test="dualClassName != null">-->
+<!--            AND dual_class_name = #{dualClassName}-->
+<!--        </if>-->
+<!--        <if test="f985 != null">-->
+<!--            AND f985 = #{f985}-->
+<!--        </if>-->
+<!--        <if test="f211 != null">-->
+<!--            AND f211 = #{f211}-->
+<!--        </if>-->
+<!--        <if test="spname != null and spname != ''">-->
+<!--            AND spname = #{spname}-->
+<!--        </if>-->
+<!--        <if test="fk == '物理'">-->
+<!--            AND wlrank &gt;= #{minn} AND wlrank &lt; #{maxn}-->
+<!--            ORDER BY wlrank-->
+<!--            LIMIT #{pagesize} OFFSET #{startindex}-->
+<!--        </if>-->
+<!--        <if test="fk == '历史'">-->
+<!--            AND lsrank &gt;= #{minn} AND lsrank &lt; #{maxn}-->
+<!--            ORDER BY lsrank-->
+<!--            LIMIT #{pagesize} OFFSET #{startindex}-->
+<!--        </if>-->
+<!--    </select>-->
+<!--    <select id="selectcount" resultType="java.lang.Long">-->
+<!--        SELECT COUNT(*)-->
+<!--        FROM college-->
+<!--        JOIN college_city ON college.id = college_city.college_id-->
+<!--        JOIN city ON city.id = college_city.city_id-->
+<!--        JOIN college_major ON college_major.id = college.id-->
+<!--        JOIN major ON college_major.major_id = major.id-->
+<!--        join province_city on province_city.city_id =city.id-->
+<!--        join province on province_city.province_id =province.id-->
+<!--        WHERE wlrank != 0-->
+<!--        <if test="collegeName != null">-->
+<!--            AND college.name LIKE CONCAT('%', #{collegeName}, '%')-->
+<!--        </if>-->
+<!--        <if test="province != null and province != '全部'">-->
+<!--            AND province.name = #{province}-->
+<!--        </if>-->
+<!--        <if test="city != null">-->
+<!--            AND city.cityname = #{city}-->
+<!--        </if>-->
+<!--        <if test="typeName != null and typeName != '全部'">-->
+<!--            AND type_name = #{typeName}-->
+<!--        </if>-->
+<!--        <if test="natureName != null">-->
+<!--            AND nature_name = #{natureName}-->
+<!--        </if>-->
+<!--        <if test="level1Name != null">-->
+<!--            AND level1_name = #{level1Name}-->
+<!--        </if>-->
+<!--        <if test="level2Name != null">-->
+<!--            AND level2_name = #{level2Name}-->
+<!--        </if>-->
+<!--        <if test="level3Name != null">-->
+<!--            AND level3_name = #{level3Name}-->
+<!--        </if>-->
+<!--        <if test="dualClassName != null">-->
+<!--            AND dual_class_name = #{dualClassName}-->
+<!--        </if>-->
+<!--        <if test="f985 != null">-->
+<!--            AND f985 = #{f985}-->
+<!--        </if>-->
+<!--        <if test="f211 != null">-->
+<!--            AND f211 = #{f211}-->
+<!--        </if>-->
+<!--        <if test="spname != null and spname != ''">-->
+<!--            AND spname = #{spname}-->
+<!--        </if>-->
+<!--        <if test="fk == '物理'">-->
+<!--            AND wlrank >= #{minn} AND wlrank &lt; #{maxn}-->
+<!--        </if>-->
+<!--        <if test="fk == '历史'">-->
+<!--            AND lsrank >= #{minn} AND lsrank &lt; #{maxn}-->
+<!--        </if>-->
+<!--    </select>-->
+    <select id="query_volunteer_intelligent" resultMap="InliResultMap">
+        SELECT college_id as collegeid, college.name as collegename, major_id as majorid,
+        spname as majorname, num,
+        CASE WHEN #{fk} = '物理' THEN wlscore
+        WHEN #{fk} = '历史' THEN lsscore
+        END as score,
+        CASE WHEN #{fk} = '物理' THEN wlrank
+        WHEN #{fk} = '历史' THEN lsrank
+        END as rrank <!-- 注意这里的rank -->
+        FROM college
+        JOIN college_city ON college.id = college_city.college_id
+        JOIN city ON city.id = college_city.city_id
+        JOIN college_major ON college_major.id = college.id
+        JOIN major ON college_major.major_id = major.id
+        join province_city on province_city.city_id =city.id
+        join province on province_city.province_id =province.id
+        WHERE (wlrank != 0 OR lsrank != 0)
+        <if test="collegeName != null">
+            AND college.name LIKE CONCAT('%', #{collegeName}, '%')
+        </if>
+        <if test="province != null and province != '全部'">
+            AND province.name = #{province}
+        </if>
+        <if test="city != null">
+            AND city.cityname = #{city}
+        </if>
+        <if test="typeName != null and typeName != '全部'">
+            AND type_name = #{typeName}
+        </if>
+        <if test="natureName != null">
+            AND nature_name = #{natureName}
+        </if>
+        <if test="level1Name != null">
+            AND level1_name = #{level1Name}
+        </if>
+        <if test="level2Name != null">
+            AND level2_name = #{level2Name}
+        </if>
+        <if test="level3Name != null">
+            AND level3_name = #{level3Name}
+        </if>
+        <if test="dualClassName != null">
+            AND dual_class_name = #{dualClassName}
+        </if>
+        <if test="f985 != null">
+            AND f985 = #{f985}
+        </if>
+        <if test="f211 != null">
+            AND f211 = #{f211}
+        </if>
+        <if test="spname != null and spname != ''">
+            AND spname = #{spname}
+        </if>
+        <if test="fk == '物理'">
+            AND wlrank &gt;= #{minn} AND wlrank &lt; #{maxn}
+            ORDER BY wlrank
+            LIMIT #{pagesize} OFFSET #{startindex}
+        </if>
+        <if test="fk == '历史'">
+            AND lsrank &gt;= #{minn} AND lsrank &lt; #{maxn}
+            ORDER BY lsrank
+            LIMIT #{pagesize} OFFSET #{startindex}
+        </if>
+    </select>
+
+    <select id="selectcount" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM college
+        JOIN college_city ON college.id = college_city.college_id
+        JOIN city ON city.id = college_city.city_id
+        JOIN college_major ON college_major.id = college.id
+        JOIN major ON college_major.major_id = major.id
+        join province_city on province_city.city_id =city.id
+        join province on province_city.province_id =province.id
+        WHERE (wlrank != 0 OR lsrank != 0)
+        <if test="collegeName != null">
+            AND college.name LIKE CONCAT('%', #{collegeName}, '%')
+        </if>
+        <if test="province != null and province != '全部'">
+            AND province.name = #{province}
+        </if>
+        <if test="city != null">
+            AND city.cityname = #{city}
+        </if>
+        <if test="typeName != null and typeName != '全部'">
+            AND type_name = #{typeName}
+        </if>
+        <if test="natureName != null">
+            AND nature_name = #{natureName}
+        </if>
+        <if test="level1Name != null">
+            AND level1_name = #{level1Name}
+        </if>
+        <if test="level2Name != null">
+            AND level2_name = #{level2Name}
+        </if>
+        <if test="level3Name != null">
+            AND level3_name = #{level3Name}
+        </if>
+        <if test="dualClassName != null">
+            AND dual_class_name = #{dualClassName}
+        </if>
+        <if test="f985 != null">
+            AND f985 = #{f985}
+        </if>
+        <if test="f211 != null">
+            AND f211 = #{f211}
+        </if>
+        <if test="spname != null and spname != ''">
+            AND spname = #{spname}
+        </if>
+        <if test="fk == '物理'">
+            AND wlrank >= #{minn} AND wlrank &lt; #{maxn}
+        </if>
+        <if test="fk == '历史'">
+            AND lsrank >= #{minn} AND lsrank &lt; #{maxn}
+        </if>
+    </select>
+    <select id="getquery_volunteer_intelligent" resultMap="InliResultMap">
+        SELECT college_id as collegeid, college.name as collegename, major_id as majorid,
+        spname as majorname, num,
+        CASE WHEN #{fk} = '物理' THEN wlscore
+        WHEN #{fk} = '历史' THEN lsscore
+        END as score,
+        CASE WHEN #{fk} = '物理' THEN wlrank
+        WHEN #{fk} = '历史' THEN lsrank
+        END as rrank <!-- 注意这里的rank -->
+        FROM college
+        JOIN college_city ON college.id = college_city.college_id
+        JOIN city ON city.id = college_city.city_id
+        JOIN college_major ON college_major.id = college.id
+        JOIN major ON college_major.major_id = major.id
+        join province_city on province_city.city_id =city.id
+        join province on province_city.province_id =province.id
+        WHERE (wlrank != 0 OR lsrank != 0)
+        <if test="college_name != null and college_name!=''">
+            AND college.name LIKE CONCAT('%', #{college_name}, '%')
+        </if>
+        <if test="province != null and province != '全部' and province!=''">
+            AND province.name = #{province}
+        </if>
+        <if test="spname != null and spname != ''">
+            AND spname = #{spname}
+        </if>
+        <if test="fk == '物理'">
+            AND wlrank &gt;= #{minn} AND wlrank &lt; #{maxn}
+            ORDER BY wlrank
+        </if>
+        <if test="fk == '历史'">
+            AND lsrank &gt;= #{minn} AND lsrank &lt; #{maxn}
+            ORDER BY lsrank
+        </if>
+
+    </select>
+
+</mapper>

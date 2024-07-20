@@ -4,7 +4,6 @@ import jsu.lmh.project1.entity.PageBean;
 import jsu.lmh.project1.entity.Result;
 import jsu.lmh.project1.service.ScoreSegmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,4 +26,7 @@ public class ScoreSegmentController {
             return Result.error("查询错误");
         }
     }
+    /**
+     * 修改某个分段成绩
+     */
 }

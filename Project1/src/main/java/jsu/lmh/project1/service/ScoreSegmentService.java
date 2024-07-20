@@ -31,4 +31,13 @@ public class ScoreSegmentService {
         pageBean.setRows(list);
         return pageBean;
     }
+
+    public Integer getrank(int score, String fk) {
+        if(fk.equals("物理")){
+            return scoreSegmentMapper.getrankwl(score);
+        }
+        else{
+            return scoreSegmentMapper.getrankls(score);
+        }
+    }
 }

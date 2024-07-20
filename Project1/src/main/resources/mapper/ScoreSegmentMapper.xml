@@ -13,8 +13,8 @@
     <select id="queryseg_wl" resultMap="ScoreSegment">
         select * from wuli
         <where>
-            <if test="score!=null">
-                score=#{score}
+            <if test="value!=null">
+                score=#{value}
             </if>
         </where>
         order by score desc limit #{pagesize} offset #{startindex}
@@ -23,16 +23,16 @@
     <select id="querycount_wl" resultType="java.lang.Long">
         select count(*) from wuli
         <where>
-            <if test="score!=null">
-                score=#{score}
+            <if test="value!=null">
+                score=#{value}
             </if>
         </where>
     </select>
     <select id="queryseg_ls" resultMap="ScoreSegment">
         select * from lishi
         <where>
-            <if test="score!=null">
-                score=#{score}
+            <if test="value!=null">
+                score=#{value}
             </if>
         </where>
         order by score desc  limit #{pagesize} offset #{startindex}
@@ -41,8 +41,8 @@
     <select id="querycount_ls" resultType="java.lang.Long">
         select count(*) from lishi
         <where>
-            <if test="score!=null">
-                score=#{score}
+            <if test="value!=null">
+                score=#{value}
             </if>
         </where>
     </select>
